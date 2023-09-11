@@ -4,7 +4,7 @@ using TodoList.Core.Interfaces;
 using TodoList.Core.Repositories;
 using TodoList.Core.Services;
 using TodoList.Infrastructure.Data;
-using TodoList.Infrastructure.Respositories;
+using TodoList.Infrastructure.Repositories;
 
 namespace TodoList.Api.Extensions
 {
@@ -15,7 +15,7 @@ namespace TodoList.Api.Extensions
 
             // Domain
             services.AddScoped<ITodoListService, TodoListService>();
-            services.AddScoped<ITodoListRepository, TodoListRespository>();
+            services.AddScoped<ITodoListRepository, TodoListRepository>();
 
             // Infra
             services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoItemsDB"));

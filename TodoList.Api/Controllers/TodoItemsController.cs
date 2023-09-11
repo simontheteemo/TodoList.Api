@@ -87,7 +87,7 @@ namespace TodoList.Api.Controllers
         /// <param name="todoItem"></param>
         /// <returns>TodoItem</returns>
         [HttpPost]
-        public async Task<IActionResult> PostTodoItem(TodoItem todoItem)
+        public async Task<IActionResult> PostTodoItem(TodoListDto todoItem)
         {
             if (string.IsNullOrEmpty(todoItem?.Description))
             {

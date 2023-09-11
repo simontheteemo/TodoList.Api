@@ -3,13 +3,13 @@ using TodoList.Core.Models;
 using TodoList.Core.Repositories;
 using TodoList.Infrastructure.Data;
 
-namespace TodoList.Infrastructure.Respositories
+namespace TodoList.Infrastructure.Repositories
 {
-    public class TodoListRespository : ITodoListRepository
+    public class TodoListRepository : ITodoListRepository
     {
         private readonly TodoContext _context;
 
-        public TodoListRespository(TodoContext todoContext)
+        public TodoListRepository(TodoContext todoContext)
         {
             _context = todoContext;
         }
