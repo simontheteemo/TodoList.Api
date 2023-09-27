@@ -31,7 +31,7 @@ namespace TodoList.Api.Controllers
         /// <returns>A list of Todo Items</returns>
         [HttpGet]
         public async Task<IActionResult> GetTodoItems()
-        {
+        {   
             return Ok(await _service.GetTodoItems());
         }
 

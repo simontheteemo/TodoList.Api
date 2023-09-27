@@ -30,7 +30,7 @@ namespace TodoList.Core.Services
         }
 
         public async Task<IList<TodoItem>> GetTodoItems()
-        {
+        {   
             return await _repository.GetTodoItems();
         }
 
