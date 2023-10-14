@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using TodoList.Api.Extensions;
 using AutoMapper;
+using Microsoft.Extensions.Logging;
 
 namespace TodoList.Api
 {
@@ -39,7 +40,10 @@ namespace TodoList.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TodoList.Api", Version = "v1" });
             });
-
+            services.AddLogging(builder =>
+            {
+                builder.AddConsole(); // Add other providers if needed
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
