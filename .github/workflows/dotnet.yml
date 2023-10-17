@@ -26,10 +26,10 @@ jobs:
       run: dotnet publish -c Release -o ./publish
     - name: zip publish
       run: Compress-Archive -Path ./publish -DestinationPath ./publish/publish.zip
-  deploy:
-    runs-on: windows-latest
-    needs: build
-    steps:
+  # deploy:
+  #   runs-on: windows-latest
+  #   needs: build
+  #   steps:
     - name: Configure AWS credentials from Test account
       uses: aws-actions/configure-aws-credentials@v1
       with:
