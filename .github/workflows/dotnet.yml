@@ -39,7 +39,14 @@ jobs:
       - name: Upload artifacts to S3
         run: |
           aws s3 cp ./ s3://todolist.api/builds/ --recursive --region ap-southeast-2 --debug
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Deploy using CodeDeploy
         run: |
           aws deploy create-deployment --region ap-southeast-2 --debug --application-name TodoList.Api --deployment-group-name TodoList.Api_DeploymentGroup --s3-location bucket=todolist.api,bundleType=zip,key=builds/
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          
