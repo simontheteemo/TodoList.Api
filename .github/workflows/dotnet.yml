@@ -55,8 +55,4 @@ jobs:
           aws-region: ap-southeast-2
       - name: Deploy using CodeDeploy
         run: |
-          aws deploy create-deployment \
-            --application-name TodoList.Api \
-            --deployment-group-name TodoList.Api_DeploymentGroup \
-            --s3-location bucket=todolist.api,bundleType=zip,key=artifacts/publish.zip --debug
-          
+          aws deploy create-deployment --application-name TodoList.Api --deployment-group-name TodoList.Api_DeploymentGroup --s3-location bucket=todolist.api,bundleType=zip,key=artifacts/publish.zip --debug
