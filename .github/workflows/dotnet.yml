@@ -38,7 +38,7 @@ jobs:
 
       - name: Upload artifacts to S3
         run: |
-          aws s3 cp artifacts/ s3://todolist.api/builds/ --recursive
+          aws s3 cp artifacts/ s3://todolist.api/builds/ --recursive --debug
 
       - name: Deploy using CodeDeploy
         run: |
