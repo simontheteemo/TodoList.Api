@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TodoList.Core.Interfaces;
 using TodoList.Core.Interfaces.Clients;
+using TodoList.Core.Models;
 
 namespace TodoList.Core.Services
 {
@@ -18,9 +19,9 @@ namespace TodoList.Core.Services
             _xeroSqsClient = xeroSqsClient;
         }
 
-        public SendMessageResponse SendMessageToSQS(string message)
+        public SendMessageResponse SendMessageToSQS(TodoItem item)
         {
-            return _xeroSqsClient.SendMessageToSQS(message).Result;
+            return _xeroSqsClient.SendMessageToSQS(item).Result;
         }
     }
 }

@@ -5,6 +5,10 @@ using TodoList.Core.Interfaces.Clients;
 using Microsoft.Extensions.DependencyInjection;
 using Amazon.Runtime.Internal.Util;
 using Microsoft.Extensions.Logging;
+using TodoList.Core.Repositories;
+using TodoList.Core.Models;
+using Newtonsoft.Json;
+using System;
 
 public class SQSPollingService : IHostedService, IDisposable
 {
@@ -14,7 +18,6 @@ public class SQSPollingService : IHostedService, IDisposable
 
     public SQSPollingService(IServiceScopeFactory scopeFactory, ILogger<SQSPollingService> logger)
     {
-        //_xeroSqsClient = xeroSqsClient;
         _scopeFactory = scopeFactory;
         _logger = logger;
     }
@@ -45,6 +48,26 @@ public class SQSPollingService : IHostedService, IDisposable
                 foreach (var message in messages)
                 {
                     _logger.LogInformation($"Received message: {message.Body}");
+                    try
+                    {
+                        var todoItem = JsonConvert.DeserializeObject<TodoItem>(message.Body);
+                        var _repository = scope.ServiceProvider.GetRequiredService<ITodoListRepository>();
+                        var response = await _repository.CreateTodoItem(todoItem);
+                        if (response != null )
+                        {
+                            _logger.LogInformation($"Inserted| {message.Body}");
+                             var deleteMessageResponse = await _xeroSqsClient.DeleteMessageAsync(message.ReceiptHandle, cancellationToken);
+                            if (deleteMessageResponse != null)
+                            {
+                                _logger.LogInformation($"Deleted| {deleteMessageResponse.ToString}");
+                            }
+                        }
+                    }
+                    catch (Exception ex) {
+                        var exception = $"{nameof(PollMessagesAsync)}|{ex}";
+                        _logger.LogError(exception);
+                        throw new Exception(exception);
+                    }
                 }
             }
             // Add any additional processing or delay logic as needed

@@ -49,7 +49,7 @@ namespace TodoList.Api.Controllers
             catch(Exception ex) { 
                 return BadRequest(ex.Message);
             }*/
-            return Ok(_xeroSqsService.SendMessageToSQS(todoItem.Description));
+            return Ok(_xeroSqsService.SendMessageToSQS(_mapper.Map<TodoItem>(todoItem)));
         }
     }
 }

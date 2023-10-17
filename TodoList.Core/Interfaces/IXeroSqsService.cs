@@ -10,6 +10,6 @@ namespace TodoList.Core.Interfaces
 {
     public interface IXeroSqsService
     {
-        SendMessageResponse SendMessageToSQS(string message);       
+        SendMessageResponse SendMessageToSQS(TodoItem item);
     }
 }
